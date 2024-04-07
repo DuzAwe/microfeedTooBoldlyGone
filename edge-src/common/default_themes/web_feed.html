@@ -43,15 +43,48 @@
   </section>
   {{/description}}
 
-    <section>
+  <section>
     <h2 class="border-b">
-      Listen
+      Latest
     </h2>
 
     <div>
-     <iframe src="https://embed.acast.com/6612a74a62e1bc00164a887f?feed=true" frameBorder="0" width="100%" height="380px"></iframe>
+      {{^items.length}}
+      No items.
+      {{/items.length}}
+
+      {{#items}}
+      <div class="mb-4">
+        <a href="{{_microfeed.web_url}}" class="mb-1">
+          {{title}}
+          <span class="icon-arrow-right"></span>
+        </a>
+        <div class="text-sm">
+          {{_microfeed.date_published_short}}
+
+          {{#_microfeed.duration_hhmmss}}
+          &middot;
+          <i>{{_microfeed.duration_hhmmss}}</i>
+          {{/_microfeed.duration_hhmmss}}
+        </div>
+      </div>
+      {{/items}}
+    </div>
+
+    <div class="flex justify-center mt-4">
+      {{#_microfeed.items_prev_cursor}}
+      <div class="px-2">
+        <a href="?prev_cursor={{_microfeed.items_prev_cursor}}&sort={{_microfeed.items_sort_order}}"><span
+          class="icon-arrow-left"> Prev</span></a>
+      </div>
+      {{/_microfeed.items_prev_cursor}}
+
+      {{#_microfeed.items_next_cursor}}
+      <div class="px-2">
+        <a href="?next_cursor={{_microfeed.items_next_cursor}}&sort={{_microfeed.items_sort_order}}">Next <span
+          class="icon-arrow-right"></span></a>
+      </div>
+      {{/_microfeed.items_next_cursor}}
     </div>
   </section>
-  
- 
 </main>
